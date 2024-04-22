@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "pjano"
+name = "pjanoo"
 version = "0.1.0"
 description = "Piano & Jazz"
 authors = ["alkasm <alex@theory.shop>"]
