@@ -14,7 +14,7 @@ def _rotate_tuple(t: Sequence[T]) -> Sequence[T]:
 class scale_intervals(SimpleNamespace):
     major = ionian = (
         intervals.unison,
-        intervals.second,
+        intervals.major_second,
         intervals.major_third,
         intervals.perfect_fourth,
         intervals.perfect_fifth,
@@ -29,7 +29,7 @@ class scale_intervals(SimpleNamespace):
     locrian = _rotate_tuple(aeolian)
     harmonic_minor = (
         intervals.unison,
-        intervals.second,
+        intervals.major_second,
         intervals.minor_third,
         intervals.perfect_fourth,
         intervals.perfect_fifth,
@@ -55,7 +55,11 @@ class ScaleInKey(Scale):
         )
 
 
-class SevenNoteScale(Scale):
+class DiatonicScale(Scale):
+    @property
+    def first(self) -> pitch.PitchClass:
+        return self.root
+
     @property
     def second(self) -> pitch.PitchClass:
         return self.root + self.intervals[1]
@@ -82,7 +86,7 @@ class SevenNoteScale(Scale):
 
 
 @dataclass
-class MajorScale(ScaleInKey, SevenNoteScale):
+class MajorScale(ScaleInKey, DiatonicScale):
 
     @classmethod
     def from_key(cls, root: pitch.PitchClass, key: keys.Key) -> MajorScale:
